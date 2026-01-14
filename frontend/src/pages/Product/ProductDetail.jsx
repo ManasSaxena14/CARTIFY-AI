@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import {
     Loader, Star, ShoppingCart, ArrowLeft, Minus, Plus,
     ShieldCheck, Truck, RotateCcw, Sparkles, Heart, Share2
@@ -11,6 +11,7 @@ import orderAPI from '../../api/orderAPI';
 import userAPI from '../../api/userAPI';
 import { useAuth } from '../../context/AuthContext';
 import toast from 'react-hot-toast';
+import { formatPrice } from '../../utils/pricing';
 
 const ProductDetail = () => {
     const { id } = useParams();
@@ -102,6 +103,7 @@ const ProductDetail = () => {
         try {
             setAddingToCart(true);
             await cartAPI.addToCart(product._id, quantity);
+            window.dispatchEvent(new CustomEvent('cart-updated'));
             toast.success('Added to Cart!');
         } catch {
             toast.error('Failed to add to cart');
@@ -246,7 +248,7 @@ const ProductDetail = () => {
                         <div className="flex items-end gap-6 pb-8 border-b border-slate-100">
                             <div className="flex flex-col">
                                 <span className="text-xs font-bold text-text-light uppercase tracking-widest mb-1">Pricing</span>
-                                <span className="text-5xl font-black text-primary tracking-tighter">₹{product.price}</span>
+                                <span className="text-5xl font-black text-primary tracking-tighter">₹{formatPrice(product.price)}</span>
                             </div>
                         </div>
 

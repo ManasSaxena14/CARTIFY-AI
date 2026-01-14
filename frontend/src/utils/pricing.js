@@ -10,3 +10,9 @@ export const calculatePrices = (itemsPrice) => {
         totalPrice
     };
 };
+
+export const formatPrice = (amount) => {
+    return Number(amount).toLocaleString('en-IN', {
+        maximumFractionDigits: 0,
+    });
+};

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { AnimatePresence } from 'framer-motion'; // motion removed
+import { motion, AnimatePresence } from 'framer-motion';
 import {
     Sparkles, ShoppingBag, Zap, TrendingUp, ArrowRight, Search,
     Star, ShieldCheck, Heart, User, Filter, ArrowUpRight
@@ -365,7 +365,7 @@ const Home = () => {
                             ) : (
                                 suggestionChips.map((chip, index) => (
                                     <motion.button
-                                        key={chip}
+                                        key={`${chip}-${index}`}
                                         initial={{ opacity: 0, y: 20 }}
                                         whileInView={{ opacity: 1, y: 0 }}
                                         transition={{ delay: 1.0 + index * 0.1, duration: 0.4 }}

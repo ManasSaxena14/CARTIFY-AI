@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-// import { motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Package, DollarSign, Tag, Layers, FileText, Image as ImageIcon, Plus, Trash2, ArrowLeft, Save } from 'lucide-react';
 import productAPI from '../../api/productAPI';
 import toast from 'react-hot-toast';

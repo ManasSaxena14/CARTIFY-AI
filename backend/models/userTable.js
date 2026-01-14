@@ -14,6 +14,7 @@ const userSchema = new mongoose.Schema({
     required: [true, 'Please enter your email'],
     unique: true,
     lowercase: true,
+    trim: true,
     match: [
       /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
       'Please enter a valid email address'
@@ -23,7 +24,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Please enter your password'],
     minlength: [6, 'Your password must be at least 6 characters long'],
-    select: false 
+    select: false
   },
   role: {
     type: String,
@@ -69,7 +70,7 @@ userSchema.methods.comparePassword = async function (enteredPassword) {
 userSchema.methods.generateAccessToken = function () {
   return jwt.sign(
     { id: this._id },
-    process.env.JWT_ACCESS_SECRET || 'fallback_jwt_access_secret',
+    process.env.JWT_ACCESS_SECRET,
     { expiresIn: process.env.JWT_ACCESS_EXPIRE || '15m' }
   );
 };
@@ -77,7 +78,7 @@ userSchema.methods.generateAccessToken = function () {
 userSchema.methods.generateRefreshToken = function () {
   return jwt.sign(
     { id: this._id },
-    process.env.JWT_REFRESH_SECRET || 'fallback_jwt_refresh_secret',
+    process.env.JWT_REFRESH_SECRET,
     { expiresIn: process.env.JWT_REFRESH_EXPIRE || '7d' }
   );
 };

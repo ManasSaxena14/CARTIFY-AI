@@ -1,11 +1,11 @@
 import User from '../models/userTable.js';
-import { asyncHandler } from '../utils/apiResponse.js';
+import catchAsyncError from '../middleware/catchAsyncError.js';
 import { ErrorHandler } from '../utils/errorHandler.js';
 import crypto from 'crypto';
 import generateForgotPasswordEmail from '../utils/generateForgotPasswordEmail.js';
 import sendEmail from '../utils/sendEmail.js';
 
-export const registerUser = asyncHandler(async (req, res, next) => {
+export const registerUser = catchAsyncError(async (req, res, next) => {
   const { name, email, password } = req.body;
 
   if (!name || !email || !password) {
@@ -45,7 +45,7 @@ export const registerUser = asyncHandler(async (req, res, next) => {
   });
 });
 
-export const loginUser = asyncHandler(async (req, res, next) => {
+export const loginUser = catchAsyncError(async (req, res, next) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
@@ -84,7 +84,7 @@ export const loginUser = asyncHandler(async (req, res, next) => {
   });
 });
 
-export const logoutUser = asyncHandler(async (req, res, next) => {
+export const logoutUser = catchAsyncError(async (req, res, next) => {
   res.cookie('refreshToken', '', {
     httpOnly: true,
     expires: new Date(0),
@@ -98,7 +98,7 @@ export const logoutUser = asyncHandler(async (req, res, next) => {
   });
 });
 
-export const getLoggedInUser = asyncHandler(async (req, res, next) => {
+export const getLoggedInUser = catchAsyncError(async (req, res, next) => {
   const user = await User.findById(req.user.id);
 
   res.status(200).json({
@@ -108,7 +108,7 @@ export const getLoggedInUser = asyncHandler(async (req, res, next) => {
   });
 });
 
-export const forgotPassword = asyncHandler(async (req, res, next) => {
+export const forgotPassword = catchAsyncError(async (req, res, next) => {
   const { email } = req.body;
 
   if (!email) {
@@ -125,7 +125,7 @@ export const forgotPassword = asyncHandler(async (req, res, next) => {
   await user.save({ validateBeforeSave: false });
 
   try {
-    const resetUrl = `${req.protocol}://${req.get('host')}/api/auth/reset-password/${resetToken}`;
+    const resetUrl = `${process.env.FRONTEND_URL || 'http://localhost:5173'}/reset-password/${resetToken}`;
 
     const { html, text } = generateForgotPasswordEmail(user, resetUrl);
 
@@ -150,7 +150,7 @@ export const forgotPassword = asyncHandler(async (req, res, next) => {
   }
 });
 
-export const resetPassword = asyncHandler(async (req, res, next) => {
+export const resetPassword = catchAsyncError(async (req, res, next) => {
   const { token } = req.params;
 
   const resetPasswordToken = crypto.createHash('sha256').update(token).digest('hex');
@@ -195,7 +195,7 @@ export const resetPassword = asyncHandler(async (req, res, next) => {
   });
 });
 
-export const updatePassword = asyncHandler(async (req, res, next) => {
+export const updatePassword = catchAsyncError(async (req, res, next) => {
   const { oldPassword, newPassword } = req.body;
 
   if (!oldPassword || !newPassword) {
@@ -221,7 +221,7 @@ export const updatePassword = asyncHandler(async (req, res, next) => {
   });
 });
 
-export const updateProfile = asyncHandler(async (req, res, next) => {
+export const updateProfile = catchAsyncError(async (req, res, next) => {
   const { name, email } = req.body;
 
   const newUserData = {};

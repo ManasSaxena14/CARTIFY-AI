@@ -24,7 +24,11 @@ const Register = () => {
         setError('');
 
         try {
-            const response = await authAPI.register(formData);
+            const cleanFormData = {
+                ...formData,
+                email: formData.email.trim()
+            };
+            const response = await authAPI.register(cleanFormData);
             localStorage.setItem('accessToken', response.data.data.accessToken);
             navigate('/');
         } catch (err) {

@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Send, Bot, CheckCircle2, Loader2, Mail, Github, Linkedin, Instagram, MapPin, Phone, Mail as MailIcon, Globe, Shield, Truck, RotateCcw } from 'lucide-react';
-// import { motion, AnimatePresence } from 'framer-motion';
-import { AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import newsletterAPI from '../../api/newsletterAPI';
 import toast from 'react-hot-toast';
 

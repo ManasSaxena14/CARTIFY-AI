@@ -3,6 +3,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { ShoppingCart, User, Search, Menu, X, LogOut, Loader, Bot, ChevronDown, ShoppingBag, LayoutDashboard, Heart } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import logo from '../../assets/logo.png';
+import cartAPI from '../../api/cartAPI';
 
 const Header = () => {
     const navigate = useNavigate();
@@ -26,7 +27,29 @@ const Header = () => {
         setIsOpen(false);
     }, [location]);
 
-    const cartItemsCount = 0;
+    const [cartItemsCount, setCartItemsCount] = useState(0);
+
+    useEffect(() => {
+        const fetchCartCount = async () => {
+            if (!user) {
+                setCartItemsCount(0);
+                return;
+            }
+            try {
+                const response = await cartAPI.getMyCart();
+                const itemsCount = response.data.data?.items?.reduce((total, item) => total + item.quantity, 0) || 0;
+                setCartItemsCount(itemsCount);
+            } catch {
+                setCartItemsCount(0);
+            }
+        };
+
+        fetchCartCount();
+
+        // Listen for custom event 'cart-updated' to refresh count
+        window.addEventListener('cart-updated', fetchCartCount);
+        return () => window.removeEventListener('cart-updated', fetchCartCount);
+    }, [user]);
 
     const handleSearch = async (e) => {
         e.preventDefault();

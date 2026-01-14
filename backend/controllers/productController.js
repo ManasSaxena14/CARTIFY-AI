@@ -7,10 +7,6 @@ import { getAIFilters, getAIRecommendation } from '../utils/aiReport.js';
 import mongoose from 'mongoose';
 
 export const createProduct = catchAsyncError(async (req, res, next) => {
-  if (req.user.role !== 'admin') {
-    return next(new ErrorHandler('Only admin can create products', 403));
-  }
-
   const { name, description, price, category, stock } = req.body;
 
   if (!name || !description || !price || !category || !stock) {
@@ -113,10 +109,6 @@ export const getSingleProduct = catchAsyncError(async (req, res, next) => {
 });
 
 export const updateProduct = catchAsyncError(async (req, res, next) => {
-  if (req.user.role !== 'admin') {
-    return next(new ErrorHandler('Only admin can update products', 403));
-  }
-
   const { id } = req.params;
   const { name, description, price, category, stock } = req.body;
 
@@ -151,10 +143,6 @@ export const updateProduct = catchAsyncError(async (req, res, next) => {
 });
 
 export const deleteProduct = catchAsyncError(async (req, res, next) => {
-  if (req.user.role !== 'admin') {
-    return next(new ErrorHandler('Only admin can delete products', 403));
-  }
-
   const { id } = req.params;
 
   const product = await Product.findById(id);

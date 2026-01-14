@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-// import { motion, AnimatePresence } from 'framer-motion';
-import { AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, Target, ShieldCheck, Zap, ChevronDown, Bot, MessageSquare, Globe, Heart } from 'lucide-react';
 
 const FAQItem = ({ question, answer }) => {

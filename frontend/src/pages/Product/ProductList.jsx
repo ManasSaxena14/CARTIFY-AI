@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-// import { motion, AnimatePresence } from 'framer-motion';
-import { AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
     Filter, ChevronDown, SlidersHorizontal, Search,
     LayoutGrid, List, Sparkles, X, ArrowUpRight
 } from 'lucide-react';
 import productAPI from '../../api/productAPI';
 import ProductCard from '../../components/common/ProductCard';
+import { formatPrice } from '../../utils/pricing';
 
 const ProductList = () => {
     // const location = useLocation();
@@ -26,6 +26,7 @@ const ProductList = () => {
         min: Number(searchParams.get('minPrice')) || 0,
         max: Number(searchParams.get('maxPrice')) || 1000000000
     });
+    const [localSearch, setLocalSearch] = useState(searchQuery || '');
 
     const [categories, setCategories] = useState([]);
 
@@ -91,6 +92,17 @@ const ProductList = () => {
         searchParams.set('minPrice', min);
         searchParams.set('maxPrice', max);
         setSearchParams(searchParams);
+    };
+
+    const handleSearchSubmit = (e) => {
+        if (e.key === 'Enter') {
+            if (localSearch.trim()) {
+                searchParams.set('search', localSearch);
+            } else {
+                searchParams.delete('search');
+            }
+            setSearchParams(searchParams);
+        }
     };
 
     const containerVariants = {
@@ -190,6 +202,9 @@ const ProductList = () => {
                         <input
                             type="text"
                             placeholder="Search within this collection..."
+                            value={localSearch}
+                            onChange={(e) => setLocalSearch(e.target.value)}
+                            onKeyDown={handleSearchSubmit}
                             className="w-full pl-16 pr-8 py-6 bg-white border border-slate-100 rounded-[2.5rem] outline-none shadow-sm focus:ring-4 focus:ring-primary/5 focus:border-primary transition-all text-xl font-medium placeholder:text-text-light/40"
                         />
                         <div className="absolute right-4 top-1/2 -translate-y-1/2 flex gap-2">
@@ -262,7 +277,7 @@ const ProductList = () => {
                                 />
                                 <div className="flex justify-between text-xs font-bold text-text-light">
                                     <span>₹0</span>
-                                    <span>Up to ₹{priceRange.max.toLocaleString()}</span>
+                                    <span>Up to ₹{formatPrice(priceRange.max)}</span>
                                 </div>
                             </div>
                         </div>

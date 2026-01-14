@@ -17,9 +17,4 @@ router.route('/place').post(protect, placeOrder);
 router.route('/my').get(protect, myOrders);
 router.route('/:id').get(protect, getSingleOrder);
 
-
-
-router.route('/:id/status').put(protect, authorizeRoles('admin'), updateOrderStatus);
-router.route('/:id').delete(protect, authorizeRoles('admin'), deleteOrder);
-
 export default router;

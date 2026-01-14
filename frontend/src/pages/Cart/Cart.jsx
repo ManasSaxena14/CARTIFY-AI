@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-// import { motion, AnimatePresence } from 'framer-motion';
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
     Trash2, Plus, Minus, ArrowRight, ShoppingBag,
     Loader, Sparkles, ShieldCheck, Zap, Info
 } from 'lucide-react';
 import cartAPI from '../../api/cartAPI';
+import { formatPrice } from '../../utils/pricing';
 
 const Cart = () => {
     const navigate = useNavigate();
@@ -35,6 +35,7 @@ const Cart = () => {
             setUpdating(true);
             await cartAPI.updateCartItem(productId, newQuantity);
             await fetchCart();
+            window.dispatchEvent(new CustomEvent('cart-updated'));
         } catch {
             // Silently handle error
         } finally {
@@ -47,6 +48,7 @@ const Cart = () => {
             setUpdating(true);
             await cartAPI.removeFromCart(productId);
             await fetchCart();
+            window.dispatchEvent(new CustomEvent('cart-updated'));
         } catch {
             // Silently handle error
         } finally {
@@ -134,7 +136,7 @@ const Cart = () => {
                                     </div>
                                     <div className="space-y-1">
                                         <span className="text-[0.6rem] font-bold text-primary uppercase tracking-widest">{item.product.category || 'Curated'}</span>
-                                        <Link to={`/products/${item.product._id}`} className="block font-black text-text-dark text-xl hover:text-primary transition-colors line-clamp-1 leading-tight">
+                                        <Link to={`/ products / ${item.product._id} `} className="block font-black text-text-dark text-xl hover:text-primary transition-colors line-clamp-1 leading-tight">
                                             {item.product.name}
                                         </Link>
                                         <div className="flex items-center gap-2 pt-1">
@@ -172,9 +174,9 @@ const Cart = () => {
                                 {/* Valuation */}
                                 <div className="col-span-3 text-right mt-4 md:mt-0">
                                     <div className="flex flex-col">
-                                        <span className="text-2xl font-black text-text-dark tracking-tighter leading-none">₹{item.price * item.quantity}</span>
+                                        <span className="text-2xl font-black text-text-dark tracking-tighter leading-none">₹{formatPrice(item.price * item.quantity)}</span>
                                         {item.quantity > 1 && (
-                                            <span className="text-[0.65rem] font-bold text-text-light/60 uppercase tracking-widest mt-1">₹{item.price} UNIT</span>
+                                            <span className="text-[0.65rem] font-bold text-text-light/60 uppercase tracking-widest mt-1">₹{formatPrice(item.price)} UNIT</span>
                                         )}
                                     </div>
                                 </div>
@@ -193,7 +195,7 @@ const Cart = () => {
                         <div className="space-y-6 mb-10 relative">
                             <div className="flex justify-between items-center bg-white/5 p-4 rounded-3xl border border-white/10">
                                 <span className="text-xs font-bold uppercase tracking-widest opacity-60">Selection Subtotal</span>
-                                <span className="font-black text-xl tracking-tighter">₹{subtotal}</span>
+                                <span className="font-black text-xl tracking-tighter">₹{formatPrice(subtotal)}</span>
                             </div>
 
                             <div className="flex justify-between items-center px-4">
@@ -207,14 +209,14 @@ const Cart = () => {
                                         Tax Levy (18%) <Info className="w-3 h-3 opacity-40" />
                                     </span>
                                 </div>
-                                <span className="font-bold tracking-tighter opacity-80 font-mono text-sm leading-none">₹{tax}</span>
+                                <span className="font-bold tracking-tighter opacity-80 font-mono text-sm leading-none">₹{formatPrice(tax)}</span>
                             </div>
                         </div>
 
                         <div className="pt-8 border-t border-white/20 mb-10 relative">
                             <div className="flex justify-between items-end">
                                 <span className="text-sm font-black uppercase tracking-[0.2em] mb-1">Grand Cumulative</span>
-                                <span className="text-5xl font-black tracking-tighter text-primary-light">₹{total}</span>
+                                <span className="text-5xl font-black tracking-tighter text-primary-light">₹{formatPrice(total)}</span>
                             </div>
                         </div>
 

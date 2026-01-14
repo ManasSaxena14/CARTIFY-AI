@@ -6,6 +6,7 @@ import { useAuth } from '../../context/AuthContext';
 import cartAPI from '../../api/cartAPI';
 import userAPI from '../../api/userAPI';
 import toast from 'react-hot-toast';
+import { formatPrice } from '../../utils/pricing';
 
 const ProductCard = ({ product }) => {
     const { user } = useAuth();
@@ -25,6 +26,7 @@ const ProductCard = ({ product }) => {
         try {
             setAdding(true);
             await cartAPI.addToCart(product._id, 1);
+            window.dispatchEvent(new CustomEvent('cart-updated'));
 
             toast.custom((t) => (
                 <div className={`${t.visible ? 'animate-enter' : 'animate-leave'} max-w-md w-full bg-white shadow-2xl rounded-2xl pointer-events-auto flex ring-1 ring-black/5 border-l-4 border-primary`}>
@@ -167,7 +169,7 @@ const ProductCard = ({ product }) => {
                 <div className="flex items-center justify-between pt-2 border-t border-slate-50">
                     <div className="flex flex-col">
                         <span className="text-[0.6rem] font-bold text-text-light uppercase tracking-widest leading-none mb-1">Starting From</span>
-                        <span className="text-3xl font-display text-text-dark tracking-tight">₹{product.price}</span>
+                        <span className="text-3xl font-display text-text-dark tracking-tight">₹{formatPrice(product.price)}</span>
                     </div>
 
                     <motion.button

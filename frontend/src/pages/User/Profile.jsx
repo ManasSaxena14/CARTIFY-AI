@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import {
     User, Package, Calendar, Loader,
     LogOut, Shield, Sparkles, ShoppingBag,
@@ -8,6 +8,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import authAPI from '../../api/authAPI';
 import orderAPI from '../../api/orderAPI';
+import { formatPrice } from '../../utils/pricing';
 
 const Profile = () => {
     const navigate = useNavigate();
@@ -203,7 +204,7 @@ const Profile = () => {
                                         <div className="flex flex-row md:flex-col items-center md:items-end justify-between w-full md:w-auto gap-4 md:border-l md:border-slate-50 md:pl-10">
                                             <div className="text-left md:text-right">
                                                 <span className="text-[0.6rem] font-bold text-text-light uppercase tracking-widest block opacity-60 mb-1">Total Valuation</span>
-                                                <span className="text-3xl font-black text-primary tracking-tighter leading-none">₹{order.totalPrice}</span>
+                                                <span className="text-3xl font-black text-primary tracking-tighter leading-none">₹{formatPrice(order.totalPrice)}</span>
                                             </div>
                                             <div className="flex items-center gap-2 text-[0.65rem] font-bold text-primary uppercase tracking-widest group-hover:gap-3 transition-all pt-1">
                                                 Full Disclosure <ChevronRight className="w-4 h-4" />

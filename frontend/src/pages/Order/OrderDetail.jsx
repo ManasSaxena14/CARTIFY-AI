@@ -7,6 +7,7 @@ import {
 } from 'lucide-react';
 import orderAPI from '../../api/orderAPI';
 import toast from 'react-hot-toast';
+import { formatPrice } from '../../utils/pricing';
 
 const OrderDetail = () => {
     const { id } = useParams();
@@ -105,11 +106,11 @@ const OrderDetail = () => {
                                         <div className="flex items-center gap-4">
                                             <span className="text-[0.65rem] font-bold text-text-light/60 uppercase tracking-widest">Qty: {item.quantity}</span>
                                             <span className="w-1 h-1 bg-slate-200 rounded-full" />
-                                            <span className="text-[0.65rem] font-bold text-primary uppercase tracking-widest">Val: ₹{item.price}</span>
+                                            <span className="text-[0.65rem] font-bold text-primary uppercase tracking-widest">Val: ₹{formatPrice(item.price)}</span>
                                         </div>
                                     </div>
                                     <div className="text-right">
-                                        <span className="text-xl font-black text-text-dark tracking-tighter">₹{item.quantity * item.price}</span>
+                                        <span className="text-xl font-black text-text-dark tracking-tighter">₹{formatPrice(item.quantity * item.price)}</span>
                                     </div>
                                 </div>
                             ))}
@@ -165,16 +166,16 @@ const OrderDetail = () => {
                         <div className="space-y-6 mb-10">
                             <div className="flex justify-between items-center px-2">
                                 <span className="text-xs font-bold uppercase tracking-widest opacity-40">Subtotal</span>
-                                <span className="font-black text-lg tracking-tighter">₹{order.itemsPrice}</span>
+                                <span className="font-black text-lg tracking-tighter">₹{formatPrice(order.itemsPrice)}</span>
                             </div>
                             <div className="flex justify-between items-center px-2">
                                 <span className="text-xs font-bold uppercase tracking-widest opacity-40">Tax</span>
-                                <span className="font-black text-lg tracking-tighter">₹{order.taxPrice}</span>
+                                <span className="font-black text-lg tracking-tighter">₹{formatPrice(order.taxPrice)}</span>
                             </div>
                             <div className="pt-6 border-t border-white/10 mt-6">
                                 <div className="flex justify-between items-end">
                                     <span className="text-sm font-black uppercase tracking-[0.2em]">Total</span>
-                                    <span className="text-5xl font-black text-primary-light tracking-tighter">₹{order.totalPrice}</span>
+                                    <span className="text-5xl font-black text-primary-light tracking-tighter">₹{formatPrice(order.totalPrice)}</span>
                                 </div>
                             </div>
                         </div>

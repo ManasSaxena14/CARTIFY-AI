@@ -9,6 +9,7 @@ import adminAPI from '../../api/adminAPI';
 import toast from 'react-hot-toast';
 import ConfirmationModal from '../../components/common/ConfirmationModal';
 import { TableSkeleton } from '../../components/common/Skeleton';
+import { formatPrice } from '../../utils/pricing';
 
 const OrderListAdmin = () => {
     const [orders, setOrders] = useState([]);
@@ -184,7 +185,7 @@ const OrderListAdmin = () => {
                                         </div>
                                     </td>
                                     <td className="px-8 py-6">
-                                        <span className="text-lg font-black text-primary tracking-tighter">₹{order.totalPrice}</span>
+                                        <span className="text-lg font-black text-primary tracking-tighter">₹{formatPrice(order.totalPrice)}</span>
                                     </td>
                                     <td className="px-8 py-6">
                                         <div className="flex items-center justify-end gap-2">
@@ -295,10 +296,10 @@ const OrderListAdmin = () => {
                                                     </div>
                                                     <div className="flex-1">
                                                         <p className="font-black text-text-dark tracking-tight">{item.name}</p>
-                                                        <p className="text-[0.6rem] font-bold text-text-light uppercase tracking-widest">{item.quantity} Units x ₹{item.price}</p>
+                                                        <p className="text-[0.6rem] font-bold text-text-light uppercase tracking-widest">{item.quantity} Units x ₹{formatPrice(item.price)}</p>
                                                     </div>
                                                     <div className="text-right">
-                                                        <p className="font-black text-primary">₹{item.price * item.quantity}</p>
+                                                        <p className="font-black text-primary">₹{formatPrice(item.price * item.quantity)}</p>
                                                     </div>
                                                 </div>
                                             ))}
@@ -309,7 +310,7 @@ const OrderListAdmin = () => {
                                     <div className="bg-text-dark p-10 rounded-[2.5rem] flex items-center justify-between text-white">
                                         <div className="space-y-1">
                                             <p className="text-[0.65rem] font-black uppercase tracking-widest opacity-50">Total Manifest Valuation</p>
-                                            <p className="text-3xl font-black tracking-tighter italic">₹{selectedOrder.totalPrice}</p>
+                                            <p className="text-3xl font-black tracking-tighter italic">₹{formatPrice(selectedOrder.totalPrice)}</p>
                                         </div>
                                         <div className="text-right flex flex-col items-end gap-2">
                                             <div className="flex items-center gap-2 group cursor-pointer">

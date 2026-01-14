@@ -172,11 +172,14 @@ export const getAIRecommendation = async (userPrompt, products) => {
     });
 
     const aiResponseText = response.choices[0]?.message?.content?.trim() || '{"recommendedIds": []}';
-    const { recommendedIds } = JSON.parse(aiResponseText);
+    let { recommendedIds } = JSON.parse(aiResponseText);
 
     if (!Array.isArray(recommendedIds)) {
       return { success: true, products: [] };
     }
+
+    // Deduplicate IDs
+    recommendedIds = [...new Set(recommendedIds)];
 
     // Map back to full product objects
     const recommendedProducts = recommendedIds

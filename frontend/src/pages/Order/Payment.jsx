@@ -9,7 +9,7 @@ import {
     Elements
 } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_KEY || 'pk_test_51QdD6wL6m0B0y1z6a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t1u2v3w4x5y6z');

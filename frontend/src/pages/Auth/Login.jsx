@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-// import { motion, AnimatePresence } from 'framer-motion';
-import { AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Lock, Mail, ArrowRight, Loader, Sparkles, ShieldCheck } from 'lucide-react';
 // import authAPI from '../../api/authAPI';
 import { useAuth } from '../../context/AuthContext';
@@ -26,8 +25,12 @@ const Login = () => {
         setError('');
 
         try {
+            const cleanFormData = {
+                ...formData,
+                email: formData.email.trim()
+            };
             // Context login updates the user state
-            const user = await login(formData);
+            const user = await login(cleanFormData);
             // Navigation happens after state is updated
             if (user && user.role === 'admin') {
                 navigate('/admin/dashboard');

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-// import { motion, AnimatePresence } from 'framer-motion';
-import { AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
     Loader, Plus, Edit2, Trash2, Search,
     Filter, LayoutGrid, List, Star, ChevronRight, X,
@@ -11,6 +10,7 @@ import adminAPI from '../../api/adminAPI';
 import toast from 'react-hot-toast';
 import ConfirmationModal from '../../components/common/ConfirmationModal';
 import { TableSkeleton } from '../../components/common/Skeleton';
+import { formatPrice } from '../../utils/pricing';
 
 const ProductListAdmin = () => {
     const [products, setProducts] = useState([]);
@@ -290,7 +290,7 @@ const ProductListAdmin = () => {
                                             </span>
                                         </div>
                                     </td>
-                                    <td className="px-8 py-6 text-sm font-black text-text-dark">₹{product.price}</td>
+                                    <td className="px-8 py-6 text-sm font-black text-text-dark">₹{formatPrice(product.price)}</td>
                                     <td className="px-8 py-6">
                                         <div className="flex items-center justify-end gap-2">
                                             <motion.button

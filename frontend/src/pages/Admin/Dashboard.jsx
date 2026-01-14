@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-// import { motion, AnimatePresence } from 'framer-motion';
-import { AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
     BarChart, Bar, XAxis, YAxis, CartesianGrid,
     Tooltip, ResponsiveContainer, AreaChart, Area, Cell
@@ -12,6 +11,7 @@ import {
 } from 'lucide-react';
 import adminAPI from '../../api/adminAPI';
 import Skeleton, { CardSkeleton } from '../../components/common/Skeleton';
+import { formatPrice } from '../../utils/pricing';
 
 const ChartSkeleton = () => (
     <div className="space-y-8">
@@ -124,7 +124,7 @@ const Dashboard = () => {
                         <StatCard
                             index={0}
                             title="Gross Revenue"
-                            value={`₹${stats?.stats?.revenue || 0}`}
+                            value={`₹${formatPrice(stats?.stats?.revenue || 0)}`}
                             icon={DollarSign}
                             color="bg-primary shadow-primary/20"
                             trend="+12.5% Inc."

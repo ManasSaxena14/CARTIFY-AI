@@ -159,7 +159,7 @@ export const deleteReview = catchAsyncError(async (req, res, next) => {
 
 export const dashboardStats = catchAsyncError(async (req, res, next) => {
     const totalRevenueResult = await Order.aggregate([
-        { $match: { paidAt: { $exists: true } } },
+        { $match: { paidAt: { $ne: null } } },
         { $group: { _id: null, total: { $sum: "$totalPrice" } } }
     ]);
     const totalRevenue = totalRevenueResult.length > 0 ? totalRevenueResult[0].total : 0;
@@ -232,7 +232,7 @@ export const dashboardStats = catchAsyncError(async (req, res, next) => {
 
 export const exportAIReport = catchAsyncError(async (req, res, next) => {
     const totalRevenueResult = await Order.aggregate([
-        { $match: { paidAt: { $exists: true } } },
+        { $match: { paidAt: { $ne: null } } },
         { $group: { _id: null, total: { $sum: "$totalPrice" } } }
     ]);
     const totalRevenue = totalRevenueResult.length > 0 ? totalRevenueResult[0].total : 0;
@@ -242,7 +242,7 @@ export const exportAIReport = catchAsyncError(async (req, res, next) => {
     const lowStock = await Product.find({ stock: { $lte: 5 } }).select('name stock');
 
     const topProductsResult = await Order.aggregate([
-        { $match: { paidAt: { $exists: true } } },
+        { $match: { paidAt: { $ne: null } } },
         { $unwind: "$orderItems" },
         {
             $group: {

@@ -1,8 +1,8 @@
-import { asyncHandler } from '../utils/apiResponse.js';
+import catchAsyncError from '../middleware/catchAsyncError.js';
 import { ErrorHandler } from '../utils/errorHandler.js';
 import sendEmail from '../utils/sendEmail.js';
 
-export const subscribeNewsletter = asyncHandler(async (req, res, next) => {
+export const subscribeNewsletter = catchAsyncError(async (req, res, next) => {
     const { email } = req.body;
 
     if (!email) {
