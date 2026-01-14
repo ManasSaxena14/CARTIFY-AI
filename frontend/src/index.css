@@ -1,0 +1,110 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    body {
+        @apply bg-background-light text-text font-body antialiased leading-relaxed;
+        font-feature-settings: "liga" 1, "calt" 1; /* Enable ligatures and contextual alternates */
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        @apply text-text-dark font-heading font-bold;
+        font-weight: 700;
+        letter-spacing: -0.025em;
+        line-height: 1.2;
+    }
+    
+    h1 {
+        font-size: clamp(2.25rem, 5vw, 3.75rem);
+        font-weight: 800;
+    }
+    
+    h2 {
+        font-size: clamp(1.875rem, 4vw, 2.75rem);
+    }
+    
+    h3 {
+        font-size: clamp(1.5rem, 3vw, 2rem);
+    }
+    
+    /* Stylish typography for paragraphs */
+    p {
+        @apply text-text leading-relaxed;
+        font-weight: 400;
+        -webkit-font-smoothing: antialiased;
+    }
+    
+    /* Stylish typography for headings with emphasis */
+    .heading-emphasis {
+        position: relative;
+    }
+    
+    .heading-emphasis:after {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        left: 0;
+        width: 60px;
+        height: 4px;
+        background: linear-gradient(90deg, #4F46E5, #E11D48);
+        border-radius: 2px;
+    }
+    
+    /* Stylish buttons */
+    button {
+        font-family: var(--font-body);
+    }
+    
+    /* Stylish text effects */
+    .text-gradient {
+        background: linear-gradient(90deg, #4F46E5, #E11D48);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    
+    .font-display {
+        font-family: var(--font-heading);
+        font-weight: 800;
+        letter-spacing: -0.025em;
+    }
+}
+
+@layer utilities {
+    .animate-float {
+        animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+
+        0%,
+        100% {
+            transform: translateY(0px);
+        }
+
+        50% {
+            transform: translateY(-20px);
+        }
+    }
+}
+
+/* Custom Scrollbar for a premium feel */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    @apply bg-transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    @apply bg-slate-300 rounded-full hover:bg-slate-400 transition-colors;
+}

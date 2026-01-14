@@ -1,0 +1,117 @@
+
+> frontend@0.0.0 lint
+> eslint .
+
+
+/Users/manasviveksaxena/Documents/PROJECTS/CartifyAI/frontend/src/components/common/ConfirmationModal.jsx
+  2:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+/Users/manasviveksaxena/Documents/PROJECTS/CartifyAI/frontend/src/components/common/Footer.jsx
+  24:18  error  '_err' is defined but never used  no-unused-vars
+
+/Users/manasviveksaxena/Documents/PROJECTS/CartifyAI/frontend/src/components/common/Header.jsx
+  38:18  error  '_err' is defined but never used  no-unused-vars
+
+/Users/manasviveksaxena/Documents/PROJECTS/CartifyAI/frontend/src/components/common/ProductCard.jsx
+   2:16  error  'useNavigate' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+   4:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u       no-unused-vars
+  48:18  error  '_err' is defined but never used                                                    no-unused-vars
+  89:18  error  '_err' is defined but never used                                                    no-unused-vars
+
+/Users/manasviveksaxena/Documents/PROJECTS/CartifyAI/frontend/src/components/common/Skeleton.jsx
+  2:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+/Users/manasviveksaxena/Documents/PROJECTS/CartifyAI/frontend/src/components/layout/AdminLayout.jsx
+  21:13  error  'logout' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+/Users/manasviveksaxena/Documents/PROJECTS/CartifyAI/frontend/src/context/AuthContext.jsx
+  25:26  error  'err' is defined but never used                                                                                                 no-unused-vars
+  70:18  error  'err' is defined but never used                                                                                                 no-unused-vars
+  88:14  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+/Users/manasviveksaxena/Documents/PROJECTS/CartifyAI/frontend/src/pages/Admin/Dashboard.jsx
+  28:41  error  'Icon' is defined but never used  no-unused-vars
+  73:22  error  '_err' is defined but never used  no-unused-vars
+
+/Users/manasviveksaxena/Documents/PROJECTS/CartifyAI/frontend/src/pages/Admin/OrderListAdmin.jsx
+   2:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+  26:18  error  'err' is defined but never used                                                no-unused-vars
+  26:23  error  Empty block statement                                                          no-empty
+  45:18  error  '_err' is defined but never used                                               no-unused-vars
+  57:18  error  '_err' is defined but never used                                               no-unused-vars
+
+/Users/manasviveksaxena/Documents/PROJECTS/CartifyAI/frontend/src/pages/Admin/ProductForm.jsx
+   13:12  error  'uploading' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+   78:9   error  'setLoading' is not defined                                                                no-undef
+   91:13  error  'setLoading' is not defined                                                                no-undef
+   95:9   error  'loading' is not defined                                                                   no-undef
+  252:31  error  'loading' is not defined                                                                   no-undef
+  256:22  error  'loading' is not defined                                                                   no-undef
+
+/Users/manasviveksaxena/Documents/PROJECTS/CartifyAI/frontend/src/pages/Admin/ProductListAdmin.jsx
+    9:16  error  'useNavigate' is defined but never used. Allowed unused vars must match /^[A-Z_]/u            no-unused-vars
+   32:12  error  'imagePreview' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+   65:18  error  '_err' is defined but never used                                                              no-unused-vars
+   84:18  error  '_err' is defined but never used                                                              no-unused-vars
+  106:18  error  '_err' is defined but never used                                                              no-unused-vars
+  135:18  error  '_err' is defined but never used                                                              no-unused-vars
+
+/Users/manasviveksaxena/Documents/PROJECTS/CartifyAI/frontend/src/pages/Admin/ReviewListAdmin.jsx
+   2:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+  24:18  error  'err' is defined but never used                                                no-unused-vars
+  24:23  error  Empty block statement                                                          no-empty
+  42:18  error  '_err' is defined but never used                                               no-unused-vars
+
+/Users/manasviveksaxena/Documents/PROJECTS/CartifyAI/frontend/src/pages/Admin/UserListAdmin.jsx
+   2:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+  26:18  error  'err' is defined but never used                                                no-unused-vars
+  26:23  error  Empty block statement                                                          no-empty
+  46:18  error  '_err' is defined but never used                                               no-unused-vars
+  58:18  error  '_err' is defined but never used                                               no-unused-vars
+
+/Users/manasviveksaxena/Documents/PROJECTS/CartifyAI/frontend/src/pages/Auth/Register.jsx
+  3:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+/Users/manasviveksaxena/Documents/PROJECTS/CartifyAI/frontend/src/pages/Cart/Cart.jsx
+  4:27  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+/Users/manasviveksaxena/Documents/PROJECTS/CartifyAI/frontend/src/pages/Home/Home.jsx
+  3:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+/Users/manasviveksaxena/Documents/PROJECTS/CartifyAI/frontend/src/pages/Order/OrderSuccess.jsx
+  4:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+/Users/manasviveksaxena/Documents/PROJECTS/CartifyAI/frontend/src/pages/Order/Payment.jsx
+   12:10  error    'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u                                    no-unused-vars
+   84:22  error    'cartError' is defined but never used                                                                            no-unused-vars
+  241:22  error    'err' is defined but never used                                                                                  no-unused-vars
+  249:8   warning  React Hook useEffect has a missing dependency: 'shippingInfo'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  509:8   warning  React Hook useEffect has a missing dependency: 'shippingInfo'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  534:22  error    'cartError' is defined but never used                                                                            no-unused-vars
+
+/Users/manasviveksaxena/Documents/PROJECTS/CartifyAI/frontend/src/pages/Order/Shipping.jsx
+  3:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+/Users/manasviveksaxena/Documents/PROJECTS/CartifyAI/frontend/src/pages/Product/Categories.jsx
+  3:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+/Users/manasviveksaxena/Documents/PROJECTS/CartifyAI/frontend/src/pages/Product/ProductDetail.jsx
+   3:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u                 no-unused-vars
+  25:12  error  'hasPurchased' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+/Users/manasviveksaxena/Documents/PROJECTS/CartifyAI/frontend/src/pages/Product/ProductList.jsx
+   2:10  error  'useLocation' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+  40:22  error  'err' is defined but never used                                                     no-unused-vars
+
+/Users/manasviveksaxena/Documents/PROJECTS/CartifyAI/frontend/src/pages/User/Profile.jsx
+   2:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+  50:18  error  'err' is defined but never used                                                no-unused-vars
+  50:23  error  Empty block statement                                                          no-empty
+
+/Users/manasviveksaxena/Documents/PROJECTS/CartifyAI/frontend/src/pages/User/Watchlist.jsx
+   2:27  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u             no-unused-vars
+  10:11  error  'navigate' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+  13:12  error  'error' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u     no-unused-vars
+
+✖ 62 problems (60 errors, 2 warnings)
+
