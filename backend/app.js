@@ -1,4 +1,6 @@
 import express from "express";
+import path from "path";
+import { fileURLToPath } from "url";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
@@ -7,6 +9,9 @@ import dotenv from "dotenv";
 import { globalErrorHandler, handleUnhandledRoutes } from './middleware/errorHandler.js';
 
 dotenv.config();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 
@@ -81,5 +86,14 @@ app.all('*', handleUnhandledRoutes);
 
 // Global error handling middleware
 app.use(globalErrorHandler);
+
+// Serve frontend in production
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../frontend/dist")));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "../frontend", "dist", "index.html"));
+  });
+}
 
 export default app;
