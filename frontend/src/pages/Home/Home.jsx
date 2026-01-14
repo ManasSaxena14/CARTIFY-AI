@@ -36,7 +36,7 @@ const Home = () => {
                 const response = await productAPI.getAllProducts();
                 setFeaturedProducts(response.data.products.slice(0, 8));
             } catch (err) {
-                console.error('Error fetching featured products:', err);
+                // Error handled silently - fallback content shown
             } finally {
                 setLoading(false);
             }
@@ -52,7 +52,7 @@ const Home = () => {
                     setSuggestionChips(titles);
                 }
             } catch (err) {
-                console.error('Error fetching AI suggestions:', err);
+                // Error handled silently - default suggestions used
             } finally {
                 setSuggestionsLoading(false);
             }

@@ -18,13 +18,10 @@ const PORT = process.env.PORT || 4000;
 // Connect to MongoDB
 const startServer = async () => {
   try {
-    console.log('Attempting to connect to database...');
     await connectDB();
-    console.log('Database connected successfully!');
 
     // Start the server only after DB connection
     app.listen(PORT, () => {
-      console.log(`Server running on port ${PORT}`);
     });
   } catch (error) {
     console.error('Failed to connect to database:', error.message);
