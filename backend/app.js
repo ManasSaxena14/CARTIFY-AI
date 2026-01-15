@@ -26,7 +26,26 @@ const app = express();
 
 app.use(
   cors({
-    origin: [process.env.FRONTEND_URL || "http://localhost:5173", "http://127.0.0.1:5173", "http://localhost:5174", "http://127.0.0.1:5174"],
+    origin: function (origin, callback) {
+      // Allow requests with no origin (mobile apps, curl, etc)
+      if (!origin) return callback(null, true);
+
+      // Allow all vercel.app subdomains (preview deployments)
+      if (origin.endsWith('.vercel.app')) return callback(null, true);
+
+      // Allow localhost for development
+      if (origin.includes('localhost') || origin.includes('127.0.0.1')) {
+        return callback(null, true);
+      }
+
+      // Allow specific production URL from env
+      if (process.env.FRONTEND_URL && origin === process.env.FRONTEND_URL) {
+        return callback(null, true);
+      }
+
+      // Block other origins
+      callback(new Error('Not allowed by CORS'));
+    },
     credentials: true,
   })
 );
