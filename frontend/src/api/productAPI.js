@@ -6,8 +6,7 @@ const productAPI = {
     createReview: (id, reviewData) => axiosClient.post(`/products/${id}/review`, reviewData),
     getCategories: () => axiosClient.get('/products/categories'),
 
-    // AI Features
-    getAIRecommendations: (userPrompt) => axiosClient.post('/products/ai-recommendation', { userPrompt }),
+    // AI Features - uses single ai-filter endpoint for all AI queries
     getAIFilteredProducts: (userQuery) => axiosClient.post('/products/ai-filter', { userQuery }),
 };
 

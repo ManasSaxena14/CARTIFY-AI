@@ -46,7 +46,7 @@ const Home = () => {
             try {
                 setSuggestionsLoading(true);
                 // Fetch recommendations with a generic 'discovery' prompt
-                const response = await productAPI.getAIRecommendations("latest premium electronics, stylish fashion, and modern lifestyle trends");
+                const response = await productAPI.getAIFilteredProducts("latest premium electronics, stylish fashion, and modern lifestyle trends");
                 if (response.data.success && response.data.products && response.data.products.length > 0) {
                     const titles = response.data.products.slice(0, 4).map(p => p.name);
                     setSuggestionChips(titles);
