@@ -169,7 +169,7 @@ const Dashboard = () => {
                             </div>
 
                             <div className="h-96 w-full">
-                                <ResponsiveContainer width="100%" height="100%">
+                                <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
                                     <AreaChart
                                         data={stats?.stats?.trends?.length > 0 ? stats.stats.trends : [
                                             { _id: 'No Data', revenue: 0 }

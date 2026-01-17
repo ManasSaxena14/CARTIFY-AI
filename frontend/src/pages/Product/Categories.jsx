@@ -2,24 +2,27 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight, Sparkles, ShoppingBag } from 'lucide-react';
+import electronicsImg from '../assets/categories/electronics.png';
+import fashionImg from '../assets/categories/fashion.png';
+import homeImg from '../assets/categories/home.png';
 
 const categories = [
     {
         name: 'Electronics',
         description: 'Next-gen gadgets & power workstations',
-        image: '/src/assets/categories/electronics.png',
+        image: electronicsImg,
         color: 'from-blue-600/80 to-indigo-600/80',
     },
     {
         name: 'Clothing',
         description: 'Curated apparel & premium street style',
-        image: '/src/assets/categories/fashion.png',
+        image: fashionImg,
         color: 'from-rose-500/80 to-orange-500/80',
     },
     {
         name: 'Home',
         description: 'Minimalist decor & intelligent home tech',
-        image: '/src/assets/categories/home.png',
+        image: homeImg,
         color: 'from-emerald-500/80 to-teal-600/80',
     },
     {
