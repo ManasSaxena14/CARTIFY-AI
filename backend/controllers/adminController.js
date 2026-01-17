@@ -185,9 +185,10 @@ export const dashboardStats = catchAsyncError(async (req, res, next) => {
     });
 
     const sevenDaysAgo = new Date();
-    sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+    sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 6); // Last 7 days including today
+    sevenDaysAgo.setHours(0, 0, 0, 0);
 
-    const revenueTrends = await Order.aggregate([
+    const revenueTrendsResult = await Order.aggregate([
         { $match: { paidAt: { $gte: sevenDaysAgo } } },
         {
             $group: {
@@ -198,6 +199,22 @@ export const dashboardStats = catchAsyncError(async (req, res, next) => {
         },
         { $sort: { _id: 1 } }
     ]);
+
+    // Zero-pad missing days in the last 7 days
+    const trends = [];
+    const trendMap = new Map(revenueTrendsResult.map(item => [item._id, item]));
+
+    for (let i = 0; i < 7; i++) {
+        const date = new Date(sevenDaysAgo);
+        date.setDate(date.getDate() + i);
+        const dateStr = date.toISOString().split('T')[0];
+
+        if (trendMap.has(dateStr)) {
+            trends.push(trendMap.get(dateStr));
+        } else {
+            trends.push({ _id: dateStr, revenue: 0, orders: 0 });
+        }
+    }
 
     const topProducts = await Order.aggregate([
         { $unwind: "$orderItems" },

@@ -24,10 +24,14 @@ export const AuthProvider = ({ children }) => {
                     setIsAuthenticated(false);
                     localStorage.removeItem('accessToken');
                 }
-            } catch {
-                localStorage.removeItem('accessToken');
-                setUser(null);
-                setIsAuthenticated(false);
+            } catch (error) {
+                // Only clear token if it's explicitly an auth error
+                if (error.response && (error.response.status === 401 || error.response.status === 403)) {
+                    localStorage.removeItem('accessToken');
+                    setUser(null);
+                    setIsAuthenticated(false);
+                }
+                // Otherwise keep the token and let them stay logged in (might be a network error)
             } finally {
                 setLoading(false);
             }

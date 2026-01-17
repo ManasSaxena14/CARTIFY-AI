@@ -125,7 +125,8 @@ export const forgotPassword = catchAsyncError(async (req, res, next) => {
   await user.save({ validateBeforeSave: false });
 
   try {
-    const resetUrl = `${process.env.FRONTEND_URL || 'http://localhost:5173'}/reset-password/${resetToken}`;
+    const frontendUrl = process.env.FRONTEND_URL || (process.env.NODE_ENV === 'production' ? 'https://cartify-ai.vercel.app' : 'http://localhost:5173');
+    const resetUrl = `${frontendUrl}/reset-password/${resetToken}`;
 
     const { html, text } = generateForgotPasswordEmail(user, resetUrl);
 

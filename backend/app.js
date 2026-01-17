@@ -80,10 +80,6 @@ app.use('/api/cloud', uploadRoutes);
 app.use('/api/support', supportRoutes);
 
 
-app.all('*', handleUnhandledRoutes);
-
-app.use(globalErrorHandler);
-
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
@@ -91,5 +87,9 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.resolve(__dirname, "../frontend", "dist", "index.html"));
   });
 }
+
+app.all('*', handleUnhandledRoutes);
+
+app.use(globalErrorHandler);
 
 export default app;

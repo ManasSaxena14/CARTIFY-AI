@@ -169,8 +169,13 @@ const Dashboard = () => {
                             </div>
 
                             <div className="h-96 w-full">
-                                <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
-                                    <AreaChart data={stats?.stats?.trends || []} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                                <ResponsiveContainer width="100%" height="100%">
+                                    <AreaChart
+                                        data={stats?.stats?.trends?.length > 0 ? stats.stats.trends : [
+                                            { _id: 'No Data', revenue: 0 }
+                                        ]}
+                                        margin={{ top: 10, right: 10, left: -20, bottom: 0 }}
+                                    >
                                         <defs>
                                             <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
                                                 <stop offset="5%" stopColor="#6366f1" stopOpacity={0.15} />

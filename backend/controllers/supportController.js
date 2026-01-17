@@ -19,12 +19,12 @@ export const subscribeNewsletter = catchAsyncError(async (req, res, next) => {
                     <p>Hi there,</p>
                     <p>Thank you for subscribing to the Cartify AI newsletter! You'll now be the first to know about our premium arrivals, AI-driven shopping trends, and exclusive offers.</p>
                     <div style="text-align: center; margin: 30px 0;">
-                        <a href="${process.env.FRONTEND_URL || 'http://localhost:5173'}" style="background-color: #4f46e5; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; font-weight: bold;">Start Shopping</a>
+                        <a href="${process.env.FRONTEND_URL || 'https://cartify-ai.vercel.app'}" style="background-color: #4f46e5; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; font-weight: bold;">Start Shopping</a>
                     </div>
                     <p style="color: #666; font-size: 12px;">If you didn't mean to subscribe, you can ignore this email.</p>
                 </div>
             `,
-            text: `Welcome to Cartify AI Newsletter! Thank you for subscribing. Visit us at ${process.env.FRONTEND_URL || 'http://localhost:5173'}`
+            text: `Welcome to Cartify AI Newsletter! Thank you for subscribing. Visit us at ${process.env.FRONTEND_URL || 'https://cartify-ai.vercel.app'}`
         });
 
         res.status(200).json({
