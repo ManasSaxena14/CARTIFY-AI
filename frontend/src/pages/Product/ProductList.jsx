@@ -24,7 +24,7 @@ const ProductList = () => {
     const [sort, setSort] = useState(searchParams.get('sort') || '-createdAt');
     const [priceRange, setPriceRange] = useState({
         min: Number(searchParams.get('minPrice')) || 0,
-        max: Number(searchParams.get('maxPrice')) || 1000000000
+        max: Number(searchParams.get('maxPrice')) || 500000
     });
     const [localSearch, setLocalSearch] = useState(searchQuery || '');
 
@@ -55,7 +55,12 @@ const ProductList = () => {
                 let response;
                 if (searchQuery) {
                     setIsAiSearch(true);
-                    response = await productAPI.getAIFilteredProducts(searchQuery);
+                    response = await productAPI.getAIFilteredProducts({
+                        userQuery: searchQuery,
+                        minPrice: priceRange.min,
+                        maxPrice: priceRange.max,
+                        sort: sort
+                    });
                 } else {
                     setIsAiSearch(false);
                     const params = {
@@ -269,15 +274,15 @@ const ProductList = () => {
                                 <input
                                     type="range"
                                     min="0"
-                                    max="1000000000"
-                                    step="5000"
+                                    max="500000"
+                                    step="1000"
                                     value={priceRange.max}
                                     onChange={(e) => handlePriceChange(0, Number(e.target.value))}
                                     className="w-full h-2 bg-slate-100 rounded-full appearance-none cursor-pointer accent-primary"
                                 />
                                 <div className="flex justify-between text-xs font-bold text-text-light">
                                     <span>₹0</span>
-                                    <span>Up to ₹{formatPrice(priceRange.max)}</span>
+                                    <span>Up to ₹{formatPrice(priceRange.max >= 500000 ? 500000 : priceRange.max)}{priceRange.max >= 500000 ? '+' : ''}</span>
                                 </div>
                             </div>
                         </div>

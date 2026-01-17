@@ -313,6 +313,7 @@ export const aiFilteredProducts = catchAsyncError(async (req, res, next) => {
 
     let query = {};
 
+    // Use AI detected keyword but allow manual category/price overrides
     if (filters.keyword && filters.keyword.trim() !== '') {
       query.$or = [
         { name: { $regex: filters.keyword, $options: 'i' } },
@@ -320,6 +321,11 @@ export const aiFilteredProducts = catchAsyncError(async (req, res, next) => {
         { category: { $regex: filters.keyword, $options: 'i' } }
       ];
     }
+
+    // Manual Overrides from Request Body
+    const manualMinPrice = Number(req.body.minPrice);
+    const manualMaxPrice = Number(req.body.maxPrice);
+    const manualSort = req.body.sort;
 
     if (filters.category && filters.category.trim() !== '') {
       if (query.$or) {
@@ -329,13 +335,17 @@ export const aiFilteredProducts = catchAsyncError(async (req, res, next) => {
       }
     }
 
-    if (filters.minPrice > 0 || filters.maxPrice > 0) {
+    // Apply Price Filters (Manual overrides take precedence if they are valid numbers)
+    const minPrice = !isNaN(manualMinPrice) && manualMinPrice >= 0 ? manualMinPrice : filters.minPrice;
+    const maxPrice = !isNaN(manualMaxPrice) && manualMaxPrice > 0 ? manualMaxPrice : filters.maxPrice;
+
+    if (minPrice > 0 || maxPrice > 0) {
       query.price = {};
-      if (filters.minPrice > 0) {
-        query.price.$gte = filters.minPrice;
+      if (minPrice > 0) {
+        query.price.$gte = minPrice;
       }
-      if (filters.maxPrice > 0) {
-        query.price.$lte = filters.maxPrice;
+      if (maxPrice > 0) {
+        query.price.$lte = maxPrice;
       }
     }
 
@@ -344,17 +354,22 @@ export const aiFilteredProducts = catchAsyncError(async (req, res, next) => {
     }
 
     let sortOptions = {};
-    if (filters.sortBy && filters.sortBy.trim() !== '') {
-      switch (filters.sortBy.toLowerCase()) {
+    const finalSort = manualSort || filters.sortBy;
+
+    if (finalSort && finalSort.trim() !== '') {
+      switch (finalSort.toLowerCase()) {
         case 'price':
           sortOptions = { price: 1 };
           break;
+        case '-price':
         case 'price-desc':
           sortOptions = { price: -1 };
           break;
+        case '-ratings':
         case 'rating':
           sortOptions = { ratings: -1 };
           break;
+        case '-createdat':
         case 'newest':
           sortOptions = { createdAt: -1 };
           break;

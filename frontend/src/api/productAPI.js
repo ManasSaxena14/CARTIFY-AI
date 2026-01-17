@@ -7,7 +7,7 @@ const productAPI = {
     getCategories: () => axiosClient.get('/products/categories'),
 
     // AI Features - uses single ai-filter endpoint for all AI queries
-    getAIFilteredProducts: (userQuery) => axiosClient.post('/products/ai-filter', { userQuery }),
+    getAIFilteredProducts: (params) => axiosClient.post('/products/ai-filter', params),
 };
 
 export default productAPI;
