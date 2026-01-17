@@ -2,9 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight, Sparkles, ShoppingBag } from 'lucide-react';
-import electronicsImg from '../assets/categories/electronics.png';
-import fashionImg from '../assets/categories/fashion.png';
-import homeImg from '../assets/categories/home.png';
+import electronicsImg from '../../assets/categories/electronics.png';
+import fashionImg from '../../assets/categories/fashion.png';
+import homeImg from '../../assets/categories/home.png';
 
 const categories = [
     {
