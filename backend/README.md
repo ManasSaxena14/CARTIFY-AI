@@ -1,5 +1,7 @@
 # Cartify AI - Backend
 
+[![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen?style=for-the-badge&logo=vercel)](https://cartify-ai-gamma.vercel.app/)
+
 This is the backend of the Cartify AI e-commerce platform built with Node.js, Express, and MongoDB. It provides REST APIs for managing products, users, orders, and other e-commerce functionality.
 
 ## Features

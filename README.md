@@ -8,6 +8,12 @@
 
 </div>
 
+<div align="center">
+
+[![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen?style=for-the-badge&logo=vercel)](https://cartify-ai-gamma.vercel.app/)
+
+</div>
+
 ---
 
 # PROBLEM AND SOLUTION
@@ -224,7 +230,7 @@ VITE_STRIPE_PUBLISHABLE_KEY=pk_test_xxxxxxxxxxxx
 
 | Service | URL |
 |---------|-----|
-| Frontend | `https://your-app.vercel.app` |
+| Frontend | [https://cartify-ai-gamma.vercel.app/](https://cartify-ai-gamma.vercel.app/) |
 | Backend | `https://your-api.onrender.com` |
 
 ---
@@ -316,5 +322,5 @@ GET /health
 ---
 
 <p align="center">
-  Made with Love using MERN Stack + AI
+  Made using MERN Stack + AI
 </p>
